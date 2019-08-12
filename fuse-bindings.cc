@@ -724,7 +724,7 @@ static thread_fn_rtn_t bindings_thread (void *data) {
 
 NAN_INLINE static Local<Date> bindings_get_date (struct fuse_timespec *out) {
   int ms = (out->tv_nsec / 1000);
-  return Nan::New<Date>(out->tv_sec * 1000 + ms).ToLocalChecked();
+  return Nan::New<Date>(out->tv_sec * 1000.0 + ms).ToLocalChecked();
 }
 
 NAN_INLINE static void bindings_set_date (struct fuse_timespec *out, Local<Date> date) {
