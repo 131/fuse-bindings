@@ -4,6 +4,7 @@ var fs = require('fs')
 var os = require('os')
 var xtend = require('xtend')
 var path = require('path')
+var debug  = require('debug')
 
 var noop = function () {}
 var call = function (cb) { cb() }
@@ -35,7 +36,10 @@ exports.mount = function (mnt, ops, opts, cb) {
   if (!cb) cb = noop
 
   ops = xtend(ops, opts) // clone
-  if (/\*|(^,)fuse-bindings(,$)/.test(process.env.DEBUG)) ops.options = ['debug'].concat(ops.options || [])
+
+  if (debug.enabled('fuse-bindings'))
+    ops.options = ['debug'].concat(ops.options || [])
+
   if (os.platform() !== 'win32') mnt = path.resolve(mnt)
 
   if (ops.displayFolder && IS_OSX) { // only works on osx
