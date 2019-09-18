@@ -54,7 +54,7 @@ int fusermount (char *path) {
 HANDLE mutex = CreateMutex(NULL, false, NULL);
 
 void thread_create (HANDLE* thread, thread_fn fn, void* data) {
-    *thread = CreateThread(NULL, 0, fn, data, 0, NULL);
+    *thread = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE) fn, data, 0, NULL);
 }
 
 void thread_join (HANDLE thread) {
