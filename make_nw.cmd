@@ -1,0 +1,1 @@
+set npm_config_runtime=nwjs&& set npm_config_modules=57&& nw-gyp rebuild --target=0.26.0 --arch=ia32 --verbose
